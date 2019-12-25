@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <title>MoneyCoin wallet</title>
+    </head>
+    
+    <body>
+        <div class="container">
+            <div>You name is: <span th:text="${user.getUsername()}">username</span></div>
+            <div>Your social security number: <span th:text="${user.getSocSecNumber()}">username</span></div>
+            <div>Your credit card number: <span th:text="${user.getCreditCard()}">username</span></div>
+            <div>You have <span th:text="${user.getMoneyCoins()}">username</span> MoneyCoins in your wallet</div>
+            <div>Latest message: <span th:utext="${user.getMessage()}">username</span></div>
+        </div>
+
+        
+        <h3>Transfer MoneyCoins to other users</h3>
+
+        <form th:action="@{/user}" method="POST">
+            
+            <span>To:</span><br/>
+            <select name="to">
+                <option th:each="user: ${users}" th:value="${user.getUsername()}" 
+                        th:text="${user.getUsername()}" >Options</option>
+            </select><br/>
+
+            <span>Amount:</span><br/>
+            <input type="number" name="amount"/><br/>
+            
+            <p>Message:</p>
+             <input type="text" name="message"/><br/>
+            
+            <input type="submit" value="Transfer"/>
+            
+            
+        </form>
+        
+        <h3>Change your password</h3>
+
+        <form action="#" th:action="@{/password}" method="POST">
+            <p>New password: <input type="password" name="password"/></p>
+            <p><input type="submit" value="Change password" /></p>
+        </form>
+        
+    </body>
+</html>
